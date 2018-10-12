@@ -1,5 +1,14 @@
+// 一共是四句代码
+//1. 生成XMLHttpRequest对象 2. 配置request 
+//3. 发送请求  4. 监听readystate（很长…很长）
+
+//以下是AJAX完整代码
 button.addEventListener('click',(e)=>{
 	let request = new XMLHttpRequest //生成XMLHttpRequest对象
+  request.open('GET','/yyy')//配置request
+  request.send()//发送请求
+  
+  //监听readystate 事件
   request.onreadystatechange = ()=>{
     if(request.readyState === 4){
      // console.log('说明请求相应都完毕了')
@@ -22,7 +31,7 @@ button.addEventListener('click',(e)=>{
         console.log('4. 打印 onject.note 是')
         console.log(object.note)
         
-        console.log('5. 打印 object.note.from 是')
+        console.log('5.打印 object.note.from 是')
         console.log(object.note.from)
      
       }else if(request.status >= 400){
@@ -33,6 +42,5 @@ button.addEventListener('click',(e)=>{
     
     
   }
-  request.open('GET','/yyy')//配置request
-  request.send()//发送请求
+
 })
