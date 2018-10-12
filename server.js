@@ -30,7 +30,7 @@ var server = http.createServer(function(request, response){
     let string = fs.readFileSync('./main.js','utf8')
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
-    response.write(string)
+    response.write('我是 request.responseText ')
     response.end()
   }else{
     response.statusCode = 404
