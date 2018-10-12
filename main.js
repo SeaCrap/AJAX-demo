@@ -1,11 +1,6 @@
-// 一共是四句代码
-//1. 生成XMLHttpRequest对象 2. 配置request 
-//3. 发送请求  4. 监听readystate（很长…很长）
-
-//以下是AJAX完整代码
 button.addEventListener('click',(e)=>{
 	let request = new XMLHttpRequest //生成XMLHttpRequest对象
-  request.open('GET','/yyy')//配置request
+  request.open('GET','http://mschen.com:8802/yyy')//配置request
   request.send()//发送请求
   
   //监听readystate 事件
