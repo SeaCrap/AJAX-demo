@@ -1,34 +1,22 @@
 button.addEventListener('click',(e)=>{
-	let request = new XMLHttpRequest //生成XMLHttpRequest对象
-  request.open('GET','http://mschen.com:8802/yyy')//配置request
-  request.send()//发送请求
+	let request = new XMLHttpRequest
+ // JS 设置请求第一部分
+ // 请求方式 协议 路径 HOTS   
+  request.open('POST','yyy')
+ 
+  //JS 设置请相应 header(第二部分)  
+  request.setRequestHeader('mrli','18')
+  request.setRequestHeader('Content-Type','x-www-form-urlencocoded')  
   
-  //监听readystate 事件
+  //请求 header 一般没有第四部分 但是可以设置
+  //get请求 chrome默认不展示第四部分 POST可以展示
+  request.send('这是我设置的第四部分')
+  
   request.onreadystatechange = ()=>{
     if(request.readyState === 4){
-     // console.log('说明请求相应都完毕了')
-     
       if(request.status >= 200 && request.status < 300){
-       // console.log('说明请求成功了')
-        //打印请求内容：request.responseText
-        console.log('1. 服务器返回符合的字符串是')
-        console.log(request.responseText)
-        
         let string = request.responseText
-        //把服务器返回的字符串
-        //转换为符合 JS 对应的值(这里是对象。有可能返回的是数组)
         let object = window.JSON.parse(string)
-        console.log('2. 打印 object 的类型是') 
-        console.log(typeof object)
-        console.log('3. 打印出 object 是')
-        console.log(object)
-        
-        console.log('4. 打印 onject.note 是')
-        console.log(object.note)
-        
-        console.log('5.打印 object.note.from 是')
-        console.log(object.note.from)
-     
       }else if(request.status >= 400){
         console.log('说明请求失败了')
       }
