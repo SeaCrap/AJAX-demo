@@ -1,10 +1,10 @@
 // JQuery 封装示例
-window.jQuery = function(nodeOrselector){// 一个节点或字符串
-  let nodes = {} //传入的是一个节点 就构造一个 nodes 对象
-  nodes.addClass = function(){} //给 nodes 对象添加 Class
-  nodes.html = function(){} //添加 html 用 html 的 API 
-  return nodes
-}
+//window.jQuery = function(nodeOrselector){// 一个节点或字符串
+  //let nodes = {} //传入的是一个节点 就构造一个 nodes 对象
+  //nodes.addClass = function(){} //给 nodes 对象添加 Class
+  //nodes.html = function(){} //添加 html 用 html 的 API 
+  //return nodes
+//}
 //给 jQuery 添加一个 ajax 的属性
 //内存：jQuery 存一个地址 地址链接一个函数
 //函数内部有个 ajax 属性 又存了一个地址
@@ -12,45 +12,33 @@ window.jQuery = function(nodeOrselector){// 一个节点或字符串
 
 
 
-
 //封装 ajax 函数
-window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
-  
-  //接受不同类型的参数
-  //url单独传入 其余参数作为一个对象 这里只需要纠正 url 和  options 即可
-  let url
-  if(arguments.length === 1){
-    url = options.url //一个参数是默认options.url
-  }else if(arguments.length === 2){
-    url = arguments[0] //两个参数时 url等于这个伪数组第0项
-    options = arguments[1]//此时纠正options是第一个参数
-  }
-    //这里是上边不同情况下都默认传入的
-    let method = options.method
-    let body = options.body
-    let successFn = options.successFn
-    let failFn = options.failFn
-    //定义 headers
-    let headers = options.headers
+
+window.jQuery = function(){}
+
+window.jQuery.ajax = function(options){
+// let url = options.url
+// let method = options.method
+// let body = options.body
+// let successFn = options.successFn
+// let failFn = options.failFn
+// let headers = options.headers
+
+  // ES6 语法之析构赋值 === 上边的 6 句代码
+  let {url, method, body, successFn, failFn, headers} = options
  
- 
-  
   let request = new XMLHttpRequest
   request.open(method,url)
   
-  //遍历 headers
   for(let key in headers){
     let value = headers[key]
     request.setRequestHeader(key,value)
    }
-
  
   request.onreadystatechange = ()=>{
     if(request.readyState === 4){
+      
       if(request.status >= 200 && request.status < 300){
-        
-        //此处是callback 
-        // ① 调用函数successFn并传参request.responseText
         successFn.call(undefined,request.responseText)
       
       }else if(request.status >= 400){
@@ -60,6 +48,8 @@ window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
   }
   request.send(body)
 }
+
+
 
 // 存同一个地址
 window.$ = window.jQuery
