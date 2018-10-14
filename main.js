@@ -15,26 +15,21 @@ window.jQuery = function(nodeOrselector){// 一个节点或字符串
 
 //封装 ajax 函数
 window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
- 
+  
+  // 接受不同类型的参数 
+  let url
   if(arguments.length === 1){
-    //分别获取各个参数
-    let url = options.url
-    let method = options.method
-    let body = options.body
-    let successFn = options.successFn
-    let failFn = options.failFn
-    //定义 headers
-    let headers = options.headers
+    url = options.url //一个参数是默认options.url
   }else if(arguments.length === 2){
-    //分别获取各个参数
-    let url = arguments[0]
+    url = arguments[0] //两个参数时 url等于这个伪数组第0项
+  }
+    //这里是上边不同情况下都默认传入的
     let method = options.method
     let body = options.body
     let successFn = options.successFn
     let failFn = options.failFn
     //定义 headers
     let headers = options.headers
-  }
  
  
   
