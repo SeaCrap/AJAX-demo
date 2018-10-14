@@ -28,6 +28,7 @@ window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
     if(request.readyState === 4){
       if(request.status >= 200 && request.status < 300){
         
+        //此处是callback 
         // ① 调用函数successFn并传参request.responseText
         successFn.call(undefined,request.responseText)
       
@@ -49,7 +50,7 @@ button.addEventListener('click',(e)=>{
     url: '/yyy',
     method: "get",
     
-    //successFn 就是回调
+    //successFn 就是回调函数 即是 callback 函数
     // ②  定义一个函数不用 等① 回调此处 x 是responseText
     successFn: (x)=>{console.log(x)},
     failFn: ()=>{console.log('失败')}
