@@ -29,7 +29,7 @@ var server = http.createServer(function(request, response){
   }else if(path === '/yyy'){
     let string = fs.readFileSync('./main.js','utf8')
     response.statusCode = 200
-    response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+    response.setHeader('Content-Type', 'text/json;charset=utf-8')
     //CORS跨域方案：告诉浏览器不要阻止 http://mrli.com:8801
     response.setHeader('Access-Control-Allow-Origin', 'http://mrli.com:8801')
     response.write(`
