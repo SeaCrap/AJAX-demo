@@ -1,45 +1,78 @@
-button.addEventListener('click',(e)=>{
-	let request = new XMLHttpRequest
- // JS 设置请求第一部分
- // 请求方式 协议 路径 HOTS   
-  request.open('POST','yyy')
- 
-  //JS 设置请求 header(第二部分)  
-  request.setRequestHeader('mrli','18')
-  request.setRequestHeader('Content-Type','x-www-form-urlencocoded')  
+// JQuery 封装示例
+window.jQuery = function(nodeOrselector){// 一个节点或字符串
+  let nodes = {} //传入的是一个节点 就构造一个 nodes 对象
+  nodes.addClass = function(){} //给 nodes 对象添加 Class
+  nodes.html = function(){} //添加 html 用 html 的 API 
+  return nodes
+}
+//给 jQuery 添加一个 ajax 的属性
+//内存：jQuery 存一个地址 地址链接一个函数
+//函数内部有个 ajax 属性 又存了一个地址
+//地址链接了另一个函数 
+
+
+
+
+//封装 ajax 函数
+window.jQuery.ajax = function(url, method,body,successFn,failFn){
+  let request = new XMLHttpRequest
   
-  //请求 header 一般没有第四部分 但是可以设置
-  //get请求 chrome默认不展示第四部分 POST可以展示
-  request.send('这是我设置请求的第四部分')
+  request.open(method,url)
   
   request.onreadystatechange = ()=>{
+    
     if(request.readyState === 4){
-      
-      //获取响应 状态(status 和 statusText)
-      console.log(request.status)
-      console.log(request.statusText)
      
       if(request.status >= 200 && request.status < 300){
-        
-        //获取所有响应 header
-        console.log(request.getAllResponseHeaders())
-       
-        // 获取响应 header 中的 Content-Type
-        console.log(request.getResponseHeader('Content-Type'))
-        
-        //获取响应 header 第四部分
-        //删除上边错误才会显示这里
-        console.log(request.responseText)
-        
-        let string = request.responseText
-        let object = window.JSON.parse(string)
+        //成功之后调用成功函数
+        successFn.call(undefined,request.responseText)
+      
       }else if(request.status >= 400){
-        console.log('说明请求失败了')
+        //失败就调用失败函数
+        failFn.call(undefined,request) 
       }
     }
-  
-    
-    
   }
+  request.send(body)
+}
 
+// 存同一个地址
+window.$ = window.jQuery
+
+//逻辑代码
+button.addEventListener('click',(e)=>{
+  
+  window.jQuery.ajax(
+    '/yyy',
+    'GET',
+    'a=1&b=2',
+    '(request.responseText)=>{}',
+    '(request)=>{}'
+  )
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+//下面这些是需要封装的	
+//let request = new XMLHttpRequest
+//request.open('POST','yyy')
+//request.send()
+//request.onreadystatechange = ()=>{
+//  if(request.readyState === 4){
+//    if(request.status >= 200 && request.status < 300){
+//      let string = request.responseText
+//      let object = window.JSON.parse(string)
+//      console.log(object)
+//    }else if(request.status >= 400){
+//    }
+//  }
+//}
 })
