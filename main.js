@@ -1,18 +1,13 @@
-function f1(responseText){}
-function f2(responseText){}
-  
+
+//作用代码  
 button.addEventListener('click',(e)=>{
-  window.jQuery.ajax({
-    url: '/xxx',
-    method: 'get',
-    success: (x)=>{
-      f1.call(undefined,x)
-      f2.call(undefined,x)
-    },
-    error: (x) =>{
-      console.log(x)
-      console.log(x.status)
-      console.log(x.responseText)
-    }
-  })
+  //window.jQuery.ajax({
+  $.ajax({
+    url: '/yyy',
+    type: 'get',
+  //Promise 方法虽然还需要传函数 优点就是不用知道函数名了
+  }).them(
+    (responseText)=>{console.log(responseText)},
+    (request)=>{console.log(request)}
+  )  
 })
