@@ -16,12 +16,14 @@ window.jQuery = function(nodeOrselector){// 一个节点或字符串
 //封装 ajax 函数
 window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
   
-  // 接受不同类型的参数 
+  //接受不同类型的参数
+  //url单独传入 其余参数作为一个对象 这里只需要纠正 options 即可
   let url
   if(arguments.length === 1){
     url = options.url //一个参数是默认options.url
   }else if(arguments.length === 2){
     url = arguments[0] //两个参数时 url等于这个伪数组第0项
+    options = arguments[1]//此时纠正options是第一个参数
   }
     //这里是上边不同情况下都默认传入的
     let method = options.method
