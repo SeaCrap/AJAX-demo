@@ -43,15 +43,13 @@ window.$ = window.jQuery
 //逻辑代码
 button.addEventListener('click',(e)=>{
  
-  // 传一个有结构的类型数据(只有对象有结构)
-  let obj = {
+  //obj只用了一次 可以直接拿来用 不用再赋值变量
+  window.jQuery.ajax({
     url: '/yyy',
     method: "get",
     successFn: ()=>{console.log('成功')},
     failFn: ()=>{console.log('失败')}
-  } 
-  
-  window.jQuery.ajax(obj)
+  })
   
   
   
