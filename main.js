@@ -10,7 +10,7 @@ button.addEventListener('click',(e)=>{
   
   //请求 header 一般没有第四部分 但是可以设置
   //get请求 chrome默认不展示第四部分 POST可以展示
-  request.send('这是我设置的第四部分')
+  request.send('这是我设置请求的第四部分')
   
   request.onreadystatechange = ()=>{
     if(request.readyState === 4){
@@ -23,9 +23,9 @@ button.addEventListener('click',(e)=>{
         
         //获取所有响应 header
         console.log(request.getAllResponseHeaders())
-        // 获取响应 header 中的 content-tepe
-        // 不知道为什么去掉 S 提示错误！
-        console.log(request.getAllResponseHeader('Content-Type'))
+       
+        // 获取响应 header 中的 Content-Type
+        console.log(request.getResponseHeader('Content-Type'))
         
         //获取响应 header 第四部分
         //删除上边错误才会显示这里
