@@ -27,8 +27,11 @@ window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
   request.onreadystatechange = ()=>{
     if(request.readyState === 4){
       if(request.status >= 200 && request.status < 300){
-        //成功之后调用成功函数
+        
+        // 回调：callback
+        // ① 调用函数successFn并传参request.responseText
         successFn.call(undefined,request.responseText)
+      
       }else if(request.status >= 400){
         failFn.call(undefined,request) 
       }
@@ -40,14 +43,15 @@ window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
 // 存同一个地址
 window.$ = window.jQuery
 
-//逻辑代码
+//使用方代码
 button.addEventListener('click',(e)=>{
  
-  //obj只用了一次 可以直接拿来用 不用再赋值变量
   window.jQuery.ajax({
     url: '/yyy',
     method: "get",
-    successFn: ()=>{console.log('成功')},
+   
+    // ②  定义一个函数不用 等① 回调 此处 x 是responseText
+    successFn: (x)=>{console.log(x)},
     failFn: ()=>{console.log('失败')}
   })
   
