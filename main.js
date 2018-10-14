@@ -21,9 +21,20 @@ window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
   let body = options.body
   let successFn = options.successFn
   let failFn = options.failFn
+  //定义 headers
+  let headers = options.headers
+ 
   
   let request = new XMLHttpRequest
   request.open(method,url)
+  
+  //遍历 headers
+  for(let key in headers){
+    let value = headers[key]
+    request.setRequestHeader(key,value)
+   }
+
+ 
   request.onreadystatechange = ()=>{
     if(request.readyState === 4){
       if(request.status >= 200 && request.status < 300){
@@ -53,6 +64,12 @@ button.addEventListener('click',(e)=>{
   window.jQuery.ajax({
     url: '/yyy',
     method: "get",
+   
+    //设置 headers 传入一个 headsers (对象)
+    headers: {
+      'content-type':'application/x-www-form-urlencoded',
+      'mrli': '18'
+    },
     successFn: (x)=>{
       //调用两个函数
       f1.call(undefined,x)
