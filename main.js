@@ -44,10 +44,10 @@ button.addEventListener('click',(e)=>{
   
   window.jQuery.ajax(
     '/yyy',
-    'GET',
+    'POST',
     'a=1&b=2',
-    '(request.responseText)=>{}',
-    '(request)=>{}'
+    (responseText)=>{console.log(1)},
+    (request)=>{console.log(2)}
   )
   
   
