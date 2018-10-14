@@ -43,25 +43,24 @@ window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
 // 存同一个地址
 window.$ = window.jQuery
 
+//定义两个函数
+function f1(responseText){}
+function f2(responseText){}
+
 //使用方代码
 button.addEventListener('click',(e)=>{
  
   window.jQuery.ajax({
-    url: '/xxx',
+    url: '/yyy',
     method: "get",
-    
-    //successFn 就是回调函数 即是 callback 函数
-    // ②  定义一个函数不用 等① 回调此处 x 是responseText
     successFn: (x)=>{
-      console.log('成功')
-      //成功之后的状态码(成功状态码打印不出来)
-      console.log(x.status)
+      //调用两个函数
+      f1.call(undefined,x)
+      f2.call(undefined,x)
     },
     failFn: (x)=>{
       console.log('失败')
-      //请求失败也是可以有响应的
       console.log(x.responseText)
-      //失败之后的状态码
       console.log(x.status)
 
     }
