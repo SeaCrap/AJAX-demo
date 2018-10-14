@@ -17,7 +17,7 @@ window.jQuery = function(nodeOrselector){// 一个节点或字符串
 window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
   
   //接受不同类型的参数
-  //url单独传入 其余参数作为一个对象 这里只需要纠正 options 即可
+  //url单独传入 其余参数作为一个对象 这里只需要纠正 url 和  options 即可
   let url
   if(arguments.length === 1){
     url = options.url //一个参数是默认options.url
