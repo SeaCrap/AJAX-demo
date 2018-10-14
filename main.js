@@ -1,23 +1,50 @@
+//Promise套路
+window.Promise =function(fn){
+  //...
+  return {
+    them: function() {} 
+  }
+}
 
-//作用代码  
+window.jQuery = function(){}
+
+window.$ = window.jQuery
+
+window.jQuery.ajax = function({url,method,body,headers}){
+  return new Promise(function(resolve,reject){
+    let request = new XMLHttpRequest
+    request.open(method,url)
+    for(let key in headers){
+      let value = headers[key]
+      request.setRequestHeader(key,value)
+    }
+    request.onreadystatechange = ()=>{
+      if(request.readyState === 4){
+        if(request.status >= 200 && request.status < 300){
+          resolve.call(undefined,request.responseText)
+        }else if(request.status >= 400){
+          reject.call(undefined,request) 
+        }
+      }
+    }
+    request.send(body)   
+  })
+}
+
+//使用方代码
 button.addEventListener('click',(e)=>{
-  //window.jQuery.ajax({
-  $.ajax({
+ 
+  window.jQuery.ajax({
     url: '/yyy',
-    type: 'get',
-  //Promise 方法虽然还需要传函数 优点就是不用知道函数名了
-  //Promise 方法优点2 可以一直them 对同一个状态多次处理 
+    method: "get",
+   
+    //设置 headers 传入一个 headsers (对象)
+    headers: {
+      'content-type':'application/x-www-form-urlencoded',
+      'mrli': '18'
+    }
   }).them(
-    (responseText)=>{
-      console.log(responseText)
-      return responseText
-    },
-    (request)=>{console.log('error1'); return '已经处理'}
-  ).them(
-    //这里是上次处理的结果：return responseTextd
-    (这里是上次处理的结果)=>{
-      console.log(这里是上次处理的结果)
-    },
-    (request)=>{console.log('error2')}
-  )  
+    (text)=>{console.log(text)}, 
+    (request)=>{console.log(request)}
+  )
 })
