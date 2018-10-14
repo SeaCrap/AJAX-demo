@@ -47,8 +47,8 @@ button.addEventListener('click',(e)=>{
   let obj = {
     url: '/yyy',
     method: "get",
-    successFn: ()=>{},
-    failFn: ()=>{}
+    successFn: ()=>{console.log('成功')},
+    failFn: ()=>{console.log('失败')}
   } 
   
   window.jQuery.ajax(obj)
