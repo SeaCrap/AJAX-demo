@@ -42,6 +42,7 @@ window.$ = window.jQuery
 
 //逻辑代码
 button.addEventListener('click',(e)=>{
+ 
   // 传一个有结构的类型数据(只有对象有结构)
   let obj = {
     url: '/yyy',
