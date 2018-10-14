@@ -15,14 +15,27 @@ window.jQuery = function(nodeOrselector){// 一个节点或字符串
 
 //封装 ajax 函数
 window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
-  //分别获取各个参数
-  let url = options.url
-  let method = options.method
-  let body = options.body
-  let successFn = options.successFn
-  let failFn = options.failFn
-  //定义 headers
-  let headers = options.headers
+ 
+  if(arguments.length === 1){
+    //分别获取各个参数
+    let url = options.url
+    let method = options.method
+    let body = options.body
+    let successFn = options.successFn
+    let failFn = options.failFn
+    //定义 headers
+    let headers = options.headers
+  }else if(arguments.length === 2){
+    //分别获取各个参数
+    let url = arguments[0]
+    let method = options.method
+    let body = options.body
+    let successFn = options.successFn
+    let failFn = options.failFn
+    //定义 headers
+    let headers = options.headers
+  }
+ 
  
   
   let request = new XMLHttpRequest
