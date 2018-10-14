@@ -14,21 +14,22 @@ window.jQuery = function(nodeOrselector){// 一个节点或字符串
 
 
 //封装 ajax 函数
-window.jQuery.ajax = function(url, method,body,successFn,failFn){
+window.jQuery.ajax = function(options){//options：选项  一般叫这个名字
+  //分别获取各个参数
+  let url = options.url
+  let method = options.method
+  let body = options.body
+  let successFn = options.successFn
+  let failFn = options.failFn
+  
   let request = new XMLHttpRequest
-  
   request.open(method,url)
-  
   request.onreadystatechange = ()=>{
-    
     if(request.readyState === 4){
-     
       if(request.status >= 200 && request.status < 300){
         //成功之后调用成功函数
         successFn.call(undefined,request.responseText)
-      
       }else if(request.status >= 400){
-        //失败就调用失败函数
         failFn.call(undefined,request) 
       }
     }
@@ -41,14 +42,15 @@ window.$ = window.jQuery
 
 //逻辑代码
 button.addEventListener('click',(e)=>{
+  // 传一个有结构的类型数据(只有对象有结构)
+  let obj = {
+    url: '/yyy',
+    method: "get",
+    successFn: ()=>{},
+    failFn: ()=>{}
+  } 
   
-  window.jQuery.ajax(
-    '/yyy',
-    'POST',
-    'a=1&b=2',
-    (responseText)=>{console.log(1)},
-    (request)=>{console.log(2)}
-  )
+  window.jQuery.ajax(obj)
   
   
   
